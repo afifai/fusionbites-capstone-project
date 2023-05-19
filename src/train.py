@@ -3,7 +3,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.random import set_seed
 from sklearn.metrics import classification_report
-from src.data import get_data_and_split, config_data_generator
+from src.utils.data import get_data_and_split, config_data_generator
 from src.models.neural_net import CustomCNN, MobileNetCNN
 from src.utils.data_preparation import load_config
 from src.utils.utilities import create_results_folder, define_callback, plot_curves, predict_data, move_candidate
@@ -24,7 +24,6 @@ def main():
 
     # Download and split the data
     get_data_and_split(link=config['download_link'],
-                       test_size=config['test_size'],
                        seed=config['seed'])
 
     # Generate the train and test data
@@ -74,7 +73,7 @@ def main():
     # generate classification report
     print(classification_report(test_data.classes, y_pred, target_names=test_data.class_indices))
 
-    result = predict_data(best_model, test_data, test_size=config['test_size'])
+    result = predict_data(best_model, test_data)
 
     # Move the candidate images to the specified folder
     move_candidate(result, test_data.filenames, thresh=config['thresh'])

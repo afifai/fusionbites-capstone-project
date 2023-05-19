@@ -107,7 +107,7 @@ def move_candidate(pred_result, filenames, thresh=0.5):
             shutil.copy(os.path.join(source_path, filenames[idx]), os.path.join(dest_path, alternate_filename))
 
 
-def predict_data(model, test_data,):
+def predict_data(model, test_data):
     """
     Predicts the test dataset using the trained model.
 

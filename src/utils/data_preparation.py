@@ -31,13 +31,12 @@ def create_train_test_folder():
     os.makedirs('data/test', exist_ok=True)
 
 
-def download_data(link, test_size):
+def download_data(link):
     """
     Downloads the dataset and displays a progress bar.
 
     Parameters:
     - link (str): The URL to download the dataset from.
-    - test_size (int): The size of the test dataset.
     """
     create_train_test_folder()
     print("[INFO] DOWNLOADING DATASET ...")

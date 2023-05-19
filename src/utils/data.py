@@ -10,13 +10,12 @@ from tensorflow.random import set_seed
 from src.utils.data_preparation import download_data, extract_data, split_data
 
 
-def get_data_and_split(link, test_size, seed):
+def get_data_and_split(link, seed):
     """
     Download, extract, and split the dataset into train and test sets if not already exists.
 
     Parameters:
     - link (str): The URL to download the dataset.
-    - test_size (float): The proportion of the dataset to include in the test split.
     - seed (int): Random seed for reproducibility.
     """
     if os.path.exists('data/train'):
