@@ -1,0 +1,13 @@
+{
+  "download_link":"http://research.us-east-1.s3.amazonaws.com/public/sushi_or_sandwich_photos.zip",
+  "train_dir":"data/train/",
+  "test_dir":"data/test/",
+  "model_output":"results/models/best_model.hdf5",
+  "model":2,
+  "test_size":150,
+  "epochs": 30,
+  "batch_size": 32,
+  "thresh": 0.35,
+  "seed": 42,
+  "learning_rate": 0.0001
+}

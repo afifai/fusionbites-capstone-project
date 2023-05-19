@@ -36,10 +36,77 @@ Note: Given the multilabel nature of the task, accuracy might not be the best me
 
 ## Prediction Criteria
 
-Post-training, the trained models are used to predict on the test set. For each prediction, the model outputs probabilities for each class. If the probability of a class is greater than a specified threshold (typically 0.5, but we can change it in `config.json`), the image is considered as belonging to that class. Specifically for this project, an image is considered a "FusionBites" food item if the model's predicted probability is above the specified threshold for that class.
+Post-training, the trained models are used to predict on the test set. For each prediction, the model outputs probabilities for each class. If the probability of a class is greater than a specified threshold, the image is considered as belonging to that class. Specifically for this project, an image is considered a "FusionBites" food item if the model's predicted probability is above the specified threshold for that class.
 
 These predictions can be used to classify new images into their respective categories, enabling an automated categorization process for food images. The results of the predictions, including classified images and performance metrics, are saved in the `results` directory for further analysis and review.
 
-## Analysis and Results
+## Getting Started
 
-TODO
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+```shell
+python 3.9+
+pip
+```
+
+### Installing
+
+Clone the repository:
+
+```shell
+git clone https://github.com/yourusername/yourrepository.git
+```
+
+Install dependencies:
+
+```shell
+pip install -r requirements.txt
+```
+
+### Configuration
+
+Configuration for the model training and evaluation can be done via the `config.json` file.
+Here's a brief explanation of each item:
+
+1. `"download_link"`: This is the link to download the dataset. The model will use the images in this zip file for training and testing.
+
+2. `"train_dir"` and `"test_dir"`: These are the directories where train and test data respectively are stored after being downloaded and unzipped.
+
+3. `"model_output"`: This is the location where trained model will be saved.
+
+4. `"model"`: This is the selection of what model that we used for training (1 for CustomCNN and 2 for Fine Tuning MobileNetV2, please refer to `src.models.neural_net.py` file).
+
+5. `"test_size"`: This is represent of the number of test images used in model evaluation.
+
+6. `"epochs"`: This is the number of times the learning algorithm will work through the entire training dataset.
+
+7. `"batch_size"`: This is the number of training examples utilized in one iteration.
+
+8. `"thresh"`: This is the threshold for the output neuron activation, which determines whether a particular label (sushi or sandwich or both) should be activated. For example, in this case, any output value above 0.35 will be considered as an active label.
+
+9. `"seed"`: This is the seed for the random number generator. It is used to ensure that your experiments can be reproduced exactly.
+
+10. `"learning_rate"`: This is a hyperparameter that controls how much to change the model in response to the estimated error each time the model weights are updated.
+
+### Data
+
+Data will downloaded automatically when we first time run the training script.
+
+### Training
+
+To train the model, run:
+
+```shell
+python run_train.py
+```
+
+## Built With
+
+- [Tensorflow](https://www.tensorflow.org/) - The deep learning framework used.
+- [MobileNetV2](https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV2) - The convolutional neural network architecture used.
+
+## Medium Post
+
+Read more about this project and the concept behind it in this [blog post](https://medium.com/@afifakbariskandar_42661/fusionbites-unleashing-the-power-of-ai-for-culinary-innovation-55b9bbfe8ad8) on Medium
