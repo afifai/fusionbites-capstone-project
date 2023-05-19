@@ -7,7 +7,7 @@ import os
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.random import set_seed
 
-from util import download_data, extract_data, split_data
+from src.utils.data_preparation import download_data, extract_data, split_data
 
 
 def get_data_and_split(link, test_size, seed):

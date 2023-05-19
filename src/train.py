@@ -1,14 +1,18 @@
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.random import set_seed
-from data import get_data_and_split, config_data_generator
-from neural_net import CustomCNN, MobileNetCNN
-from util import define_callback, plot_curves, predict_data, move_candidate, load_config
+from src.utils.data import get_data_and_split, config_data_generator
+from src.models.neural_net import CustomCNN, MobileNetCNN
+from src.utils.data_preparation import load_config
+from src.utils.utilities import create_results_folder, define_callback, plot_curves, predict_data, move_candidate
 
 def main():
     """
     Main function for executing the fusionbites project.
     """
+    # Create sub-folder in results
+    create_results_folder()
+    
     # Load the configuration from the JSON file
     config = load_config('config.json')
 
@@ -62,7 +66,3 @@ def main():
 
     # Move the candidate images to the specified folder
     move_candidate(result, test_data.filenames)
-
-
-if __name__ == '__main__':
-    main()
