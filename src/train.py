@@ -1,10 +1,13 @@
+import numpy as np
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.random import set_seed
-from src.utils.data import get_data_and_split, config_data_generator
+from sklearn.metrics import classification_report
+from src.data import get_data_and_split, config_data_generator
 from src.models.neural_net import CustomCNN, MobileNetCNN
 from src.utils.data_preparation import load_config
 from src.utils.utilities import create_results_folder, define_callback, plot_curves, predict_data, move_candidate
+
 
 def main():
     """
@@ -12,7 +15,7 @@ def main():
     """
     # Create sub-folder in results
     create_results_folder()
-    
+
     # Load the configuration from the JSON file
     config = load_config('config.json')
 
@@ -52,9 +55,7 @@ def main():
     callback = define_callback(path=config['model_output'])
     H = model.fit(train_data,
                   epochs=config['epochs'],
-                  steps_per_epoch=len(train_data),
                   validation_data=test_data,
-                  validation_steps=len(test_data),
                   callbacks=[callback])
 
     # Plot the training curves
@@ -62,7 +63,18 @@ def main():
 
     # Load the best model and predict the test data
     best_model = load_model(config['model_output'])
+
+    # calculate the accuracy of the model
+    _, accuracy = best_model.evaluate_generator(test_data, steps=len(test_data), verbose=0)
+    print('Accuracy: %.2f' % (accuracy*100))
+    # generate prediction
+    Y_pred = model.predict_generator(test_data, steps=len(test_data), verbose=0)
+    y_pred = np.argmax(Y_pred, axis=1)
+
+    # generate classification report
+    print(classification_report(test_data.classes, y_pred, target_names=test_data.class_indices))
+
     result = predict_data(best_model, test_data, test_size=config['test_size'])
 
     # Move the candidate images to the specified folder
-    move_candidate(result, test_data.filenames)
+    move_candidate(result, test_data.filenames, thresh=config['thresh'])

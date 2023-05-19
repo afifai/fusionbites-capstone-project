@@ -107,19 +107,15 @@ def move_candidate(pred_result, filenames, thresh=0.5):
             shutil.copy(os.path.join(source_path, filenames[idx]), os.path.join(dest_path, alternate_filename))
 
 
-def predict_data(model, test_data, test_size):
+def predict_data(model, test_data,):
     """
     Predicts the test dataset using the trained model.
 
     Parameters:
     - model (Model object): The trained model.
     - test_data (ImageDataGenerator object): The test data.
-    - test_size (int): The size of the test data.
 
     Returns:
     - numpy array: The predicted results.
     """
-    # test_data.batch_size = test_size
-    
-    # data, label = test_data.next()
     return model.predict_generator(test_data, steps=len(test_data), verbose=0)

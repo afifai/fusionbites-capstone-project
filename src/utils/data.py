@@ -68,5 +68,6 @@ def config_data_generator(train_dir, test_dir, val_split=0.1, batch_size=128, se
                                                  batch_size=batch_size,
                                                  target_size=(224, 224),
                                                  class_mode="categorical",
-                                                 seed=seed)
+                                                 seed=seed,
+                                                 shuffle=False)
     return train_data, test_data
