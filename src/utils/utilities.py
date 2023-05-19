@@ -5,6 +5,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.models import load_model
 from src.utils.data_preparation import split_path
 
+
 def create_results_folder():
     """
     Creates required directories for storing results if they do not exist. 
@@ -28,6 +29,7 @@ def create_results_folder():
     for path in paths:
         if not os.path.exists(path):
             os.makedirs(path)
+
 
 
 def define_callback(path):
@@ -96,6 +98,8 @@ def move_candidate(pred_result, filenames, thresh=0.5):
     print("[INFO] MOVING CANDIDATE ...")
     source_path = 'data/test/'
     dest_path = 'results/images/fusionbites_candidates/'
+    if not os.path.exists(dest_path):
+        os.makedirs(dest_path)
 
     for idx, item in enumerate(pred_result):
         if item[0] > thresh and item[1] > thresh:
@@ -115,6 +119,7 @@ def predict_data(model, test_data, test_size):
     Returns:
     - numpy array: The predicted results.
     """
-    test_data.batch_size = test_size
-    data, label = test_data.next()
-    return model.predict(data)
+    # test_data.batch_size = test_size
+    
+    # data, label = test_data.next()
+    return model.predict_generator(test_data, steps=len(test_data), verbose=0)
