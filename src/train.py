@@ -24,6 +24,7 @@ def main():
 
     # Download and split the data
     get_data_and_split(link=config['download_link'],
+                       test_size=config['test_size'],
                        seed=config['seed'])
 
     # Generate the train and test data
