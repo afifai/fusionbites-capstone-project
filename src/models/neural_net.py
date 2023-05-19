@@ -65,6 +65,7 @@ class MobileNetCNN:
         """
         input_shape = (height, width, depth)
         base_model = MobileNetV2(input_shape=input_shape, include_top=False, weights='imagenet')
+        base_model.trainable = False
 
         inputs = Input(shape=input_shape)
         model = base_model(inputs, training=False)
