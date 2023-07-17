@@ -109,4 +109,4 @@ python run_train.py
 
 ## Medium Post
 
-Read more about this project and the concept behind it in this [blog post](https://medium.com/@afifakbariskandar_42661/fusionbites-unleashing-the-power-of-ai-for-culinary-innovation-55b9bbfe8ad8) on Medium
+Read more about this project and the concept behind it in this [blog post](https://medium.com/@afifakbariskandar_42661/culinary-convergence-using-machine-learning-to-craft-fusionbites-94c3fcaed367) on Medium
